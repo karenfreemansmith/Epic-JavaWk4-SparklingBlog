@@ -11,28 +11,29 @@ public class Tag {
   }
 
   public String getText() {
-    return text;
+    return this.text;
   }
 
   public void setText(String str) {
     this.text = str;
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE tags SET text = :text";
+      String sql = "UPDATE tags SET text = :text WHERE id=:id";
       con.createQuery(sql, true)
-          .addParameter("text", text)
+          .addParameter("text", this.text)
+          .addParameter("id", this.id)
           .executeUpdate();
     }
   }
 
   public int getId() {
-    return id;
+    return this.id;
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO tags (text) VALUES (:text)";
       this.id = (int) con.createQuery(sql, true)
-                            .addParameter("text", text)
+                            .addParameter("text", this.text)
                             .executeUpdate()
                             .getKey();
     }
@@ -40,7 +41,7 @@ public class Tag {
 
   public static List<Tag> all() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id, text FROM tags";
+      String sql = "SELECT * FROM tags";
       return con.createQuery(sql)
                 .executeAndFetch(Tag.class);
     }

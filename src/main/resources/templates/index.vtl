@@ -2,6 +2,12 @@
 
 <p>Pick a Tag to View:</p>
 
+<form action="/" method="post">
+  <label for="tag">Add a Tag</label>
+  <input type="text" name="tag" id="tag">
+  <button class="btn btn-default" type="submit">Submit</button>
+</form>
+
 #if ($tags)
 <ul>
   #foreach ($tag in $tags)
@@ -9,9 +15,3 @@
   #end
 </ul>
 #end
-
-<form action="/" method="post">
-  <label for="tag">Add a Tag</label>
-  <input type="text" name="tag" id="tag">
-  <button class="btn btn-default" type="submit">Submit</button>
-</form>

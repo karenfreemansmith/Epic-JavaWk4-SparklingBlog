@@ -26,5 +26,33 @@ public class App {
       return new ModelAndView(model, view);
     }, new VelocityTemplateEngine());
 
+    get("/tags/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Tag tag = Tag.find (Integer.parseInt(request.params(":id")));
+      model.put("tag", tag);
+      model.put("tags", Tag.all());
+      model.put("template", "templates/tags.vtl");
+      return new ModelAndView(model, view);
+    }, new VelocityTemplateEngine());
+
+    post("/tags/:id", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Tag tag = Tag.find (Integer.parseInt(request.params(":id")));
+      tag.setText(request.queryParams("tag"));
+      model.put("tags", Tag.all());
+      model.put("tag", tag);
+      model.put("template", "templates/tags.vtl");
+      return new ModelAndView(model, view);
+    }, new VelocityTemplateEngine());
+
+    get("/tags/:id/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Tag tag = Tag.find(Integer.parseInt(request.params(":id")));
+      tag.delete();
+      model.put("template", "templates/tags.vtl");
+      response.redirect("/");
+      return new ModelAndView(model, view);
+    }, new VelocityTemplateEngine());
+
   }
 }
