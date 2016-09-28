@@ -1,13 +1,17 @@
-<form action="/tags/$tag.getId()" method="post">
-  <label for="tag">Update Tag</label>
-  <input type="text" name="tag" id="tag" value="$tag.getText()">
+
+
+<p>Pick a Tag to View:</p>
+
+<form action="/tags" method="post">
+  <label for="tag">Add a Tag</label>
+  <input type="text" name="tag" id="tag">
   <button class="btn btn-default" type="submit">Submit</button>
 </form>
 
 #if ($tags)
-
+<ul>
   #foreach ($tag in $tags)
-  <h3><a href="/tags/$tag.getId()">$tag.getText()</a></h3><a class="btn btn-warning" href="/tags/$tag.getId()/delete">DELETE TAG</a>
+  <li><a href="/tags/$tag.getId()">$tag.getText()</a></li>
   #end
-
+</ul>
 #end

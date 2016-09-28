@@ -1,0 +1,26 @@
+<form action="/posts/$post.getId()" method="post">
+  <label for="title">Update Title</label>
+  <input type="text" name="title" id="title" value="$post.getTitle()">
+  <label for="post">Update Text</label>
+  <input type="text" name="post" id="post" value="$post.getText()">
+  <label for="tags">Add Tag: </label>
+  <select name="tags" id="tags">
+    #foreach($tag in $tags)
+      <option value="$tag.getId()">$tag.getText()</option>
+    #end
+  </select>
+  <p>Existing Post Tags:
+    #foreach($posttag in $posttags)
+      $posttag.getText()
+    #end
+  <button class="btn btn-default" type="submit">Submit</button>
+</form>
+
+#if ($posts)
+
+  #foreach ($post in $posts)
+  <h3><a href="/posts/$post.getId()">$post.getTitle()</a></h3>
+  <a href="/posts/$post.getId()/delete"><strong>DELETE POST</strong></a></h3>
+  #end
+
+#end

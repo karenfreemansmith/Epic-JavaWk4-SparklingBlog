@@ -1,17 +1,2 @@
-<h1>Sparking Blog</h1>
-
-<p>Pick a Tag to View:</p>
-
-<form action="/" method="post">
-  <label for="tag">Add a Tag</label>
-  <input type="text" name="tag" id="tag">
-  <button class="btn btn-default" type="submit">Submit</button>
-</form>
-
-#if ($tags)
-<ul>
-  #foreach ($tag in $tags)
-  <li><a href="/tags/$tag.getId()">$tag.getText()</a></li>
-  #end
-</ul>
-#end
+<h3><a href="/tags">TAGS</a></h3>
+<h3><a href="/posts">POSTS</a></h3>

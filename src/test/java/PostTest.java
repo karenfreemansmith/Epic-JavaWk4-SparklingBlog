@@ -70,4 +70,11 @@ public class PostTest {
    assertEquals(Post.find(tempId), null);
  }
 
+ @Test
+ public void addTag_addTagToPost() {
+   Tag sampleTag = new Tag("sample");
+   testPost.addTag(sampleTag.getId());
+   assertTrue(testPost.getAllTags().contains(sampleTag));
+ }
+
 }

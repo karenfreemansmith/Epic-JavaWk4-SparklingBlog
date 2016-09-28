@@ -50,10 +50,10 @@ public class Post {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO posts (title, text) VALUES (:title, :text)";
       this.id = (int) con.createQuery(sql, true)
-                            .addParameter("title", this.title)
-                            .addParameter("text", this.text)
-                            .executeUpdate()
-                            .getKey();
+          .addParameter("title", this.title)
+          .addParameter("text", this.text)
+          .executeUpdate()
+          .getKey();
     }
   }
 
@@ -96,9 +96,24 @@ public class Post {
     }
   }
 
+  public void addTag(int tagid) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO posts_tags (postid, tagid) VALUES (:postid, :tagid)";
+      con.createQuery(sql, true)
+          .addParameter("postid", this.id)
+          .addParameter("tagid", tagid)
+          .executeUpdate()
+          .getKey();
+    }
+  }
 
-
-
-
+  public List<Tag> getAllTags() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT tags.* FROM posts JOIN posts_tags ON (posts.id=posts_tags.postid) JOIN tags ON (posts_tags.tagid=tags.id) WHERE posts.id=:id";
+      return con.createQuery(sql)
+                .addParameter("id", this.id)
+                .executeAndFetch(Tag.class);
+    }
+  }
 
 }

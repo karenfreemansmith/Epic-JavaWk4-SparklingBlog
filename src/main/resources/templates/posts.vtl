@@ -1,0 +1,25 @@
+
+
+<p>Pick a Post to View:</p>
+
+<form action="/posts" method="post">
+  <label for="title">Add a Title</label>
+  <input type="text" name="title" id="title">
+  <label for="post">Add your Post</label>
+  <input type="text" name="post" id="post">
+  <label for="tags">Add Tag: </label>
+  <select name="tags" id="tags">
+    #foreach($tag in $tags)
+      <option value="$tag.getId()">$tag.getText()</option>
+    #end
+  </select>
+  <button class="btn btn-default" type="submit">Submit</button>
+</form>
+
+#if ($posts)
+<ul>
+  #foreach ($post in $posts)
+  <li><a href="/posts/$post.getId()">$post.getTitle()</a></li>
+  #end
+</ul>
+#end

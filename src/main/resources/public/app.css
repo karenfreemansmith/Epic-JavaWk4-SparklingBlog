@@ -1,0 +1,19 @@
+body {
+  background: url("/images/jumbo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+a, a:hover, a:visited, a:active {
+  color: goldenrod;
+}
+
+input {
+  color: black;
+}
+
+.jumbotron {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 35px;
+}
